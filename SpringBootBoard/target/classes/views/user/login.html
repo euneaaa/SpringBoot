@@ -1,0 +1,21 @@
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="temp/thymeleaf_layout">
+
+<head>
+    <title>로그인</title>
+    <link rel="stylesheet" href="/res/css/user/login.css">
+    <script defer src="/res/js/user/login.js"></script>
+</head>
+
+<th:block layout:fragment="content">
+    <h1>로그인</h1>
+    <div>
+        <form th:action="@{/user/login}" method="post" th:object="${userEntity}">
+            <div><input type="text" th:field="*{uid}" placeholder="user id"></div>
+            <div><input type="password" th:field="*{upw}" placeholder="user password"></div>
+            <div><input type="submit" value="Login"></div>
+        </form>
+    </div>
+</th:block>
