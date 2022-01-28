@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.koreait.springbootboard.user.UserMapper">
+    <insert id="insUser">
+        INSERT INTO t_user  (uid, upw, nm, gender)
+        VALUES (#{uid}, #{upw}, #{nm}, ${gender})
+    </insert>
+
+    <select id="selUser" resultType="UserEntity">
+        SELECT * FROM t_user
+        <where>
+            <if test=" uid != null and uid !='' ">
+                uid = #{uid}
+            </if>
+            <if test=" iuser > 0 ">
+                AND iuser = ${iuser}
+            </if>
+        </where>
+    </select>
 
 </mapper>

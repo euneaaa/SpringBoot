@@ -5,17 +5,26 @@
 
 <head>
     <title>로그인</title>
-    <link rel="stylesheet" href="/res/css/user/login.css">
-    <script defer src="/res/js/user/login.js"></script>
+    <link rel="stylesheet" th:href="@{/css/user/login.css}">
+    <!-- AT{} 는 Standard URL 이라고 한다. -->
+    <script defer th:src="@{/css/user/login.js}"></script>
 </head>
 
 <th:block layout:fragment="content">
     <h1>로그인</h1>
     <div>
-        <form th:action="@{/user/login}" method="post" th:object="${userEntity}">
-            <div><input type="text" th:field="*{uid}" placeholder="user id"></div>
-            <div><input type="password" th:field="*{upw}" placeholder="user password"></div>
-            <div><input type="submit" value="Login"></div>
+        <form method="post" th:action="@{/user/login}" th:object="${userEntity}">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" placeholder="User Id" th:field="*{uid}">
+                <label for="uid">아이디</label>
+            </div>
+            <div class="form-floating">
+                <input type="text" class="form-control" placeholder="User Password" th:field="*{upw}">
+                <label for="upw">비밀번호</label>
+            </div>
+            <div>
+                <input type="submit" class="btn btn-primary" value="Login">
+            </div>
         </form>
     </div>
 </th:block>

@@ -1,0 +1,70 @@
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="temp/thymeleaf_layout">
+
+<head>
+    <title>회원가입</title>
+    <link rel="stylesheet" th:href="@{/css/user/join.css}">
+    <!-- AT{} 는 Standard URL 이라고 한다. -->
+    <script defer th:src="@{/js/user/join.js}"></script>
+</head>
+
+<th:block layout:fragment="content">
+    <div class="container">
+        <h1>회원가입</h1>
+        <div>
+            <form novalidate id="join_frm" class="validation-form" method="post" th:action="@{/user/join}" th:object="${userEntity}">
+                <div class="form-floating mb-3">
+                    <input required type="text" class="form-control" placeholder="User Id" th:field="*{uid}">
+                    <label class="form-label" for="uid">아이디</label>
+                    <div class="invalid-feedback">
+                        아이디를 입력해 주세요.
+                    </div>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input required type="password" class="form-control" placeholder="User Password" th:field="*{upw}">
+                    <label for="upw">비밀번호</label>
+                    <div class="invalid-feedback">
+                        비밀번호를 입력해 주세요.
+                    </div>
+                </div>
+                <div class="form-floating mb-3">
+                    <input required type="password" class="form-control" placeholder="Confirm User Password" id="confirm_upw">
+                    <label for="confirm_upw">확인 비밀번호</label>
+                    <div class="invalid-feedback">
+                        확인 비밀번호를 입력해 주세요.
+                    </div>
+                </div>
+                <div class="form-floating mb-3">
+                    <input required type="text" class="form-control" placeholder="User Name" th:field="*{nm}">
+                    <label for="nm">이름</label>
+                    <div class="invalid-feedback">
+                        이름을 입력해 주세요.
+                    </div>
+                </div>
+                <fieldset class="row mb-3">
+                    <legend class="col-form-label col-sm-2 pt-0">성별</legend>
+                    <div class="col-sm-10">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="gender" id="gender_1" value="2" checked>
+                            <label class="form-check-label" for="gender_1">
+                                여자
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="gender" id="gender_2" value="1">
+                            <label class="form-check-label" for="gender_2">
+                                남자
+                            </label>
+                        </div>
+                    </div>
+                </fieldset>
+                <div>
+                    <button class="btn btn-primary" type="submit">Join</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</th:block>

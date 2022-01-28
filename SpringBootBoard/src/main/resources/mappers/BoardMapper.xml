@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.koreait.springbootboard.board.BoardMapper">
+    <select id="selBoardList" resultType="BoardVo">
+        <!--
+            삭제되지 않았고, 지정한 카테고리 글, 최신글이 가장 위에
+            글쓴이 이름 가져오기
+            제외: icategory, ctnt, isdel, mdt, lastip
+         -->
+       SELECT   A.iboard, A.title, A.iuser, A.hits, A.rdt
+              , B.nm AS username
+         FROM t_board A
+         LEFT JOIN t_user B
+           ON A.iuser = B.iuser
+        WHERE A.isdel = 0
+          AND A.icategory = ${icategory}
+        ORDER BY A.iboard DESC
+    </select>
+
+    <select id="selBoard" resultType="BoardVo">
+        SELECT   A.iboard, A.icategory, A.title, A.ctnt, A.iuser, A.hits, A.rdt
+               , B.nm AS username
+          FROM t_board A
+          LEFT JOIN t_user B
+            ON A.iuser = B.iuser
+         WHERE A.isdel = 0
+           AND A.iboard = ${iboard}
+    </select>
+</mapper>
