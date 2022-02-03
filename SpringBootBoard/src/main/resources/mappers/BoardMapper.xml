@@ -15,6 +15,7 @@
         WHERE A.isdel = 0
           AND A.icategory = ${icategory}
         ORDER BY A.iboard DESC
+        LIMIT ${startIdx}, ${recordCount}
     </select>
 
     <select id="selBoard" resultType="BoardVo">
@@ -25,5 +26,11 @@
             ON A.iuser = B.iuser
          WHERE A.isdel = 0
            AND A.iboard = ${iboard}
+    </select>
+
+    <select id="selMaxPageVal" resultType="ResultVo">
+        SELECT CEIL(count(iboard)/${recordCount}) AS result
+        FROM t_board
+        WHERE isdel = 0 AND icategory = ${icategory}
     </select>
 </mapper>

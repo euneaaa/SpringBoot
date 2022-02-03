@@ -1,0 +1,42 @@
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="temp/thymeleaf_layout">
+
+<head>
+    <title>리스트</title>
+    <script defer th:src="@{/js/board/list.js}"></script>
+</head>
+
+<th:block layout:fragment="content">
+    <div id="data" th:with="icate=${param.icategory}" th:data-icategory="${icate}"></div>
+    <div id="board_list">
+
+        <table class="table table-hover caption-top">
+            <th:block th:each="item : ${menus}">
+                <caption th:if="${strings.equals(param.icategory, #strings.toString(item.icategory))}"
+                         th:text="${item.nm}">
+                </caption>
+            </th:block>
+            <caption>테이블 이름</caption>
+            <thead>
+            <tr class="table-secondary">
+                <th>번호</th>
+                <th>제목</th>
+                <th>글쓴이</th>
+                <th>조회수</th>
+                <th>작성일</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+
+    </div>
+    <div id="page_container">
+        <nav>
+            <ul class="pagination justify-content-center">
+            </ul>
+        </nav>
+    </div>
+</th:block>
